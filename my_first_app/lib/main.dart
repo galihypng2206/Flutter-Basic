@@ -43,6 +43,12 @@ class _CounterPageState extends State<CounterPage> {
     });
   }
 
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,12 +78,17 @@ class _CounterPageState extends State<CounterPage> {
               children: [
                 ElevatedButton(
                   onPressed: _decrementCounter,
-                  child: const Icon(Icons.remove),
+                  child: const Icon(Icons.remove_circle_outline),
+                ),
+                const SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: _resetCounter,
+                  child: const Icon(Icons.refresh),
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: _incrementCounter,
-                  child: const Icon(Icons.add),
+                  child: const Icon(Icons.add_card_outlined),
                 ),
               ],
             ),
