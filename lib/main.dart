@@ -43,11 +43,40 @@ class _CounterPageState extends State<CounterPage> {
     });
   }
 
-  void _resetCounter() {
-    setState(() {
-      _counter = 0;
-    });
-  }
+  void _confirmResetCounter() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Konfirmasi'), 
+        content: const Text('Yakin mau reset?'),
+        actions: [
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // tutup dialog (Tidak)
+                },
+                child: const Text('Tidak'),
+              ),
+              const SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _counter = 0;
+                  });
+                  Navigator.of(context).pop(); // tutup dialog (Ya)
+                },
+                child: const Text('Ya'),
+              ),
+            ],
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +99,7 @@ class _CounterPageState extends State<CounterPage> {
               style: const TextStyle(
                 fontSize: 48,
                 fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 251, 71),
               ),
             ),
             const SizedBox(height: 30),
@@ -82,7 +112,7 @@ class _CounterPageState extends State<CounterPage> {
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
-                  onPressed: _resetCounter,
+                  onPressed: _confirmResetCounter,
                   child: const Icon(Icons.refresh),
                 ),
                 const SizedBox(width: 20),
