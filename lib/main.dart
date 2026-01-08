@@ -44,39 +44,38 @@ class _CounterPageState extends State<CounterPage> {
   }
 
   void _confirmResetCounter() {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Konfirmasi'), 
-        content: const Text('Yakin mau reset?'),
-        actions: [
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // tutup dialog (Tidak)
-                },
-                child: const Text('Tidak'),
-              ),
-              const SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    _counter = 0;
-                  });
-                  Navigator.of(context).pop(); // tutup dialog (Ya)
-                },
-                child: const Text('Ya'),
-              ),
-            ],
-          ),
-        ],
-      );
-    },
-  );
-}
-
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Konfirmasi'),
+          content: const Text('Yakin mau reset?'),
+          actions: [
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // tutup dialog (Tidak)
+                  },
+                  child: const Text('Tidak'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _counter = 0;
+                    });
+                    Navigator.of(context).pop(); // tutup dialog (Ya)
+                  },
+                  child: const Text('Ya'),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +111,10 @@ class _CounterPageState extends State<CounterPage> {
                 ),
                 const SizedBox(width: 20),
                 ElevatedButton(
-                  onPressed: _confirmResetCounter,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _counter == 0 ? Colors.grey : Colors.blue,
+                  ),
+                  onPressed: _counter == 0 ? null : _confirmResetCounter,
                   child: const Icon(Icons.refresh),
                 ),
                 const SizedBox(width: 20),
